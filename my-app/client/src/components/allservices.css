@@ -1,0 +1,196 @@
+*{
+    margin: 0;padding: 0;
+}
+.main{
+    background-image: linear-gradient(to right, rgb(244, 244, 244),rgb(38, 85, 239));
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+}
+.heading1{
+
+    display: flex;
+    height: 7.5rem;
+    justify-content: center;
+    align-items: center;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    
+}
+.landing{
+   display: flex;
+   flex-direction: row;
+   width: fit-content;
+   height: max-content; 
+   
+}
+.landing .img1{
+    height: 60vh;
+    padding: 5px;
+    
+}
+.work{
+    margin-top: 40px;padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.work1{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 50px;
+    justify-content: center;
+    align-items: center; 
+}
+.work2{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin:30px 10px 0px 10px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+   
+}
+.dis{
+    margin: 20px 50px 0px 50px;
+    padding: 50px 50px 50px 50px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+}
+.w1 , .w2 , .w3{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 10px 10px 10px;
+    height: 10rem;
+    width: 25rem;
+}
+.w1 p, .w2 p, .w3 p{
+    height: 100%;
+    margin-top: 15px;
+    display: flex;
+    /* background-color: #ffffff; */
+    justify-content: center;
+    /* align-items: center; */
+   
+}
+.w1 h3, .w2 h3, .w3 h3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.formdetails{
+    margin-top: 70px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+.head1{
+    padding: 20px;
+    font-size: 40px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.details1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: max-content;
+}
+.register-form1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    margin: 1rem;
+    padding: 1rem;
+}
+.dater{
+    display: flex;
+    justify-content: center;
+   margin: 12px;
+   width: 30%;
+   height: 35px;
+   >input{
+    width: 100%;
+    padding: 5px;
+    background-color:white;
+   }
+
+}
+.input-group-text{
+    height: 40px;
+    cursor: pointer;
+}
+#submit1 {
+ display: flex;
+ color: rebeccapurpl;
+ justify-content: center;
+ align-items: center;
+ padding: 5px;
+ margin: 5px;
+ 
+}
+.data_display{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    >table{
+        display: flex;
+        padding: 5px;
+        flex-direction: column;
+        width: 100%;
+        >tr{
+            display: flex;
+            flex-direction: row;
+            padding: 2%;
+            width: 100%;
+            justify-content: space-evenly;
+            background-color: #fcfcfc;
+            >th{
+                display: flex;
+                 flex-direction: row;
+                justify-content: center;
+                padding: 13px;
+                width: 100%;
+                background-color: rgb(143, 188, 242);
+                
+            }
+            >td{
+                font-weight: bold;
+                color: #0d8ca3;
+                display: flex;
+                  align-items:start;
+                justify-content: center;
+                width: 100%;
+                flex-direction: row;
+            }
+        }
+    }
+
+ 
+   
+}
+.book-now {
+    font-size: 12px;
+    background-color: #00c853;
+    padding: 5px;
+    top: 3px;
+    right: 3px;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+  }
