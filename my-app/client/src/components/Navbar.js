@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { CgProfile } from "react-icons/cg";
 import "./Navbar.css";
 import {
   FaFacebookSquare,
@@ -9,7 +10,10 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 import { NavLink } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({isLoggedIn,userName,setLoggedIn}) => {
+  const handleLogout=()=>{
+    setLoggedIn(false);
+  };
   const [showMediaIcons, setShowMediaIcons] = useState(false);
   return (
     <>
@@ -17,8 +21,8 @@ const Navbar = () => {
         {/* 1st logo part  */}
         <div className="logo">
           <h2>
-            <span>S</span>ervice
-            <span>H</span>ub
+            <span style={{color:"red", fontFamily:"cursive"}}>S</span>ervice
+            <span style={{fontFamily:"cursive"}}>H</span>ub
           </h2>
         </div>
 
@@ -27,19 +31,36 @@ const Navbar = () => {
           className={
             showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
           }>
-          <ul>
-            <li>
-              <NavLink to="/">Home</NavLink>
-            </li>
-            <li>
-              <NavLink to="/about">about</NavLink>
-            </li>
-            <li>
-              <NavLink to="/login">login</NavLink>
-            </li>
-            <li>
-              <NavLink to="/signup">signup</NavLink>
-            </li>
+          <ul >
+          {isLoggedIn ? (
+    <>
+     <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink to="/about">About</NavLink>
+      </li>
+      <li ><CgProfile id="prfic" /><span style={{fontWeight:"bolder", color:"blue", fontFamily:"cursive"}}>{userName}</span></li>
+      <li>
+        <button id="logout" onClick={handleLogout}>Logout</button>
+      </li>
+    </>
+  ) : (
+    <>
+      <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink to="/about">About</NavLink>
+      </li>
+      <li>
+        <NavLink to="/login">Login</NavLink>
+      </li>
+      <li>
+        <NavLink to="/signup">Signup</NavLink>
+      </li>
+    </>
+  )}
           </ul>
         </div>
 

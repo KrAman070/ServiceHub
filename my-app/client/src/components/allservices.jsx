@@ -8,9 +8,9 @@ import Datepicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {FaCalendarAlt} from 'react-icons/fa' 
-const Services=()=>{
+const Services=({isLoggedIn})=>{
   const [date, setDate] = useState();
-  console.log(date);
+  // console.log(date);
   const [category,setCategory]=useState({
     service:"",city:""
   });
@@ -22,6 +22,7 @@ const Services=()=>{
     setCategory({...category,[name]:value});
   }
   const [data,setData]=useState([]);
+  const [data1,setData1]=useState([]);
   useEffect(()=>{
     fetch("/getdata",{
       method:"GET",
@@ -31,7 +32,9 @@ const Services=()=>{
       setData(data.data);
     });      
   },[]);
-  const [data1,setData1]=useState(data);
+  useEffect(() => {
+    setData1(data1);
+  }, [data1]);
   const filterData=(catItem1,catItem2,catItem3)=>{
     const result=data.filter((curData)=>{
       return curData.service===catItem1 && curData.city===catItem2 && curData.isbooked==false;
@@ -127,12 +130,14 @@ const Services=()=>{
             </tr>
             {data1.map(i=>{
               return (
-               <tr>
+               <tr key={i._id}>
                 <td>{i.service}</td>
                <td>{i.fname+"  "+i.lname}</td>
                <td>{i.city}</td>
                <td><button className="book-now"onClick={() =>{
-                navigate('/booking', { state: { data1: i } })}
+               if(isLoggedIn){ navigate('/booking', { state: { data1: i } })}
+              else {alert('Please login before booking') ;
+              navigate('/login');}}
                }>Book Now</button>
                </td>
                </tr> 

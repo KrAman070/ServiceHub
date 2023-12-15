@@ -40,9 +40,11 @@
     }
     h1{
         font-size: 35px;
+        color: #0d1065;
     }
     :hover{
-       color: rgb(38, 0, 255);
+       color: rgb(23, 8, 110);
+       text-shadow: 1px 1px #4b4bcb;
     }
  }
  .button {

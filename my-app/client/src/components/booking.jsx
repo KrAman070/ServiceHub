@@ -1,19 +1,24 @@
 import React from 'react'
-import {useState,useEffect,useNavigate} from "react";
-import { Link,useLocation } from "react-router-dom";
+import {useState,useEffect} from "react";
+import { Link,useLocation,useNavigate } from "react-router-dom";
 
 export const Booking = (props) => {
     const location=useLocation();
     const data=location.state?.data1;
-    const _id=data?._id;
+    const id = location.state?.data1?._id;
+    // console.log(id);
     const fullName=data? `${data.fname} ${data.lname}`:"";
     const city=data?.city;
     const serviceName=data?.service;
     const [isbooked, setisbooked] = useState(false);
+    const navigate=useNavigate();
     const handleBookNow = async () => {
+      console.log('handleBookNow function called');
       try{
-        const id=_id;
-        const result=await fetch(`/api/update/${id}`,{
+        const id1=id;
+        // console.log("hi id");
+        // console.log(id)
+        const result=await fetch(`/api/update/${id1}`,{
           method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -22,12 +27,21 @@ export const Booking = (props) => {
           isbooked: true,
         }),
       });
-      if (!result.ok) {
-        throw new Error('Error updating booking status');
+      // console.log('API response:', result);
+      if (result.ok) {
+        window.alert("booking successful");
+        navigate('/');
+        
+      } else {
+        console.error('Error updating booking status', result.status);
+        window.alert("well not");
+        console.log('Navigating to /login');
+        navigate('/services');
       }
       setisbooked(true);
       }
       catch(err){
+        window.alert("well not from catch");
 console.log(err);
       }
     }

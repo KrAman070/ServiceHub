@@ -8,7 +8,10 @@ function Home() {
   
   </div>
   <div className="c1">
-      <h1>ServiceHub</h1>
+      <h1>
+        <span style={{fontFamily:"cursive"}}>S</span>ervice
+        <span style={{fontFamily:"cursive"}}>H</span>ub
+        </h1>
       <p>Hey there!</p>
       <div className="btn">
       <Link to="/registration" className="button b1">
@@ -18,7 +21,6 @@ function Home() {
             Book Labour
           </Link>
       </div>
-
     </div>    
     </>
   )

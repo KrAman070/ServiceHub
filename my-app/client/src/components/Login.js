@@ -3,49 +3,51 @@ import { NavLink } from 'react-router-dom'
 import { useState } from 'react'
 import "./Login.css"
 
-const Login = () => {
-  const [user, setUser] = useState({
-    email:"",password:""
-  })
-  let name, value;
-  const handleInputs = (e) => {
-    console.log(e);
-    name = e.target.name;
-    value = e.target.value;
+const Login = ({handleInputs,user,checkSign}) => {
+  // const [isLoggedIn, setLoggedIn] = useState(false);
+  // const [user, setUser] = useState({
+  //   email:"",password:""
+  // })
+  // let name, value;
+  // const handleInputs = (e) => {
+  //   console.log(e);
+  //   name = e.target.name;
+  //   value = e.target.value;
 
-    setUser({ ...user, [name]: value });
-  }
-  const checkSign = async (e) => {
-    e.preventDefault();
-    const { email, password} = user;
-    const res = await fetch('http://localhost:5000/signin', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        email, password
-      })
+  //   setUser({ ...user, [name]: value });
+  // }
+  // const checkSign = async (e) => {
+  //   e.preventDefault();
+  //   const { email, password} = user;
+  //   const res = await fetch('http://localhost:5000/signin', {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     },
+  //     body: JSON.stringify({
+  //       email, password
+  //     })
 
 
-    });
-    if (!res.ok) {
-      window.alert("Invalid Login check Email or Password");
-      console.error("Invalid Login");
-      return;
-    }
-    const data=await res.json();
-    if(data.status===422||data.status===402||!data){
-      window.alert("Invalid Login ");
-      console.log("Invalid Login");
-    }
-    else{
-      window.alert("Successful Login");
-      console.log("successful Login");
-      // history.push("/")
-    }
+  //   });
+  //   if (!res.ok) {
+  //     window.alert("Invalid Login check Email or Password");
+  //     console.error("Invalid Login");
+  //     return;
+  //   }
+  //   const data=await res.json();
+  //   if(data.status===422||data.status===402||!data){
+  //     window.alert("Invalid Login ");
+  //     console.log("Invalid Login");
+  //   }
+  //   else{
+  //     setLoggedIn(true);
+  //     window.alert("Successful Login");
+  //     console.log("successful Login");
+  //     // history.push("/")
+  //   }
 
-  }
+  // }
 
   return (
 

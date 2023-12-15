@@ -80,7 +80,7 @@ router.put('/api/update/:id',async(req,res)=>{
             return res.status(404).json({ error: 'Data not found' });
           }
           res.json(updatedData);
-          // res.json({ message: 'Booking Successful' });
+          //  res.json({ message: 'Booking Successful' });
         } catch (error) {
           console.error(error);
           res.status(500).send('Internal Server Error');
@@ -143,13 +143,18 @@ router.post('/signin', async(req, res) => {
       }
 
       const userLogin = await SignupUser.findOne({ email: email });
-      console.log(userLogin);
+      // console.log(userLogin);
+      // console.log(userLogin.name);
       if (!userLogin) {
           res.status(402).json({ error: "plz fill the data" });
           
       }
       else {
-           res.json({ message: "user Signin Successfully" });
+      const { _id, name, email } = userLogin;
+      res.json({
+        message: "User Signin Successfully",
+        user: { _id, name, email }
+      });
       }
   }
   catch (err) {  
@@ -157,6 +162,7 @@ router.post('/signin', async(req, res) => {
   }
 });
 // task scheduler
+// 0 0 * * *
 cron.schedule('0 0 * * *', () => {
     console.log('Updating isbooked field...');
     updateIsBookedField();
@@ -169,7 +175,7 @@ cron.schedule('0 0 * * *', () => {
           isbooked: false,
         },
       };
-      const result = await User.updateMany(filter, updateOperation);
+      const result = await RegisterUser.updateMany(filter, updateOperation);
     } catch(err){
         console.log(err);
     }
