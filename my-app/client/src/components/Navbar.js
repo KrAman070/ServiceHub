@@ -21,7 +21,7 @@ const Navbar = ({isLoggedIn,userName,setLoggedIn}) => {
         {/* 1st logo part  */}
         <div className="logo">
           <h2>
-            <span style={{color:"red", fontFamily:"cursive"}}>S</span>ervice
+            <span style={{ fontFamily:"cursive"}}>S</span>ervice
             <span style={{fontFamily:"cursive"}}>H</span>ub
           </h2>
         </div>
@@ -40,7 +40,10 @@ const Navbar = ({isLoggedIn,userName,setLoggedIn}) => {
       <li>
         <NavLink to="/about">About</NavLink>
       </li>
-      <li ><CgProfile id="prfic" /><span style={{fontWeight:"bolder", color:"blue", fontFamily:"cursive"}}>{userName}</span></li>
+      <li>
+        <NavLink to="/about">News</NavLink>
+      </li>
+      <li ><CgProfile id="prfic" /><span style={{fontWeight:"bolder", color:"#149485", fontFamily:"cursive"}}>{userName}</span></li>
       <li>
         <button id="logout" onClick={handleLogout}>Logout</button>
       </li>
@@ -52,6 +55,9 @@ const Navbar = ({isLoggedIn,userName,setLoggedIn}) => {
       </li>
       <li>
         <NavLink to="/about">About</NavLink>
+      </li>
+      <li>
+        <NavLink to="/about">News</NavLink>
       </li>
       <li>
         <NavLink to="/login">Login</NavLink>
@@ -89,14 +95,12 @@ const Navbar = ({isLoggedIn,userName,setLoggedIn}) => {
               </a>
             </li>
           </ul>
-
-          {/* hamburget menu start  */}
-          <div className="hamburger-menu">
+         <div className="hamburger-menu">
             <a href="#" onClick={() => setShowMediaIcons(!showMediaIcons)}>
               <GiHamburgerMenu />
             </a>
           </div>
-        </div>
+        </div> 
       </nav>
 
       {/* hero section  */}

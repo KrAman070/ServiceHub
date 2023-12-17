@@ -2,18 +2,15 @@ import React from 'react'
 import "./Home.css"
 import { Link } from 'react-router-dom';
 function Home() {
+  
   return (
       <>
-  <div className="main11">
-  
-  </div>
-  <div className="c1">
-      <h1>
-        <span style={{fontFamily:"cursive"}}>S</span>ervice
-        <span style={{fontFamily:"cursive"}}>H</span>ub
-        </h1>
-      <p>Hey there!</p>
-      <div className="btn">
+  <div className="main11" > 
+  <body  >
+    <div class="sign">
+      <span class="fast-flicker">S</span>ervice<span class="flicker">H</span>ub
+    </div>
+    <div className="btn">
       <Link to="/registration" className="button b1">
             Labour Register
           </Link>
@@ -21,7 +18,8 @@ function Home() {
             Book Labour
           </Link>
       </div>
-    </div>    
+  </body>
+  </div>
     </>
   )
 }

@@ -69,7 +69,7 @@ const Login = ({handleInputs,user,checkSign}) => {
                    <i class="zmdi zmdi-email"></i>
 
                   </label>
-                  <input type='email' name='email' id='email' autoComplete='off'
+                  <input type='email' name='email' id='email' autoComplete='email'
                     value={user.email}
                     onChange={handleInputs}
                     placeholder='Your email'
@@ -85,7 +85,7 @@ const Login = ({handleInputs,user,checkSign}) => {
                    <i class="zmdi zmdi-lock"></i>
 
                   </label>
-                  <input type='password' name='password' id='password' autoComplete='off'
+                  <input type='password' name='password' id='password' autoComplete='current-password'
                     value={user.password}
                     onChange={handleInputs}
                     placeholder='Your password'

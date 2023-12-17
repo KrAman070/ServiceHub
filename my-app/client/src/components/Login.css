@@ -8,10 +8,10 @@ display: flex;
 }
 
 .signin-content {
-    background-color: #f8f9fa;
+    background-color: #149485;
         padding: 120px;
         border-radius: 10px;
-        box-shadow: 10px 50px 40px rgba(24, 23, 23, 0.1);
+        box-shadow: 10px 30px 40px rgba(42, 123, 117, 0.984);
 }
 
 /* .signin-image {
