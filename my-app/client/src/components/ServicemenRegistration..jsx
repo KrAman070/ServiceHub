@@ -1,8 +1,9 @@
 import React, {useState,useEffect} from "react";
 import './servicemenRegistration.css';
+import { Country, State, City }  from 'country-state-city';
 const Registration = () => {
   const [user,setUser]=useState({
-    email:"",password:"",cpassword:"",fname:"",lname:"",phone:"",service:"",gender:"",city:""
+    email:"",password:"",cpassword:"",fname:"",lname:"",phone:"",service:"",gender:"",city:"",state:"",country:""
   });
   let name,value;
   const handleInputs=(e)=>{
@@ -11,9 +12,22 @@ const Registration = () => {
     value=e.target.value;
     setUser({...user,[name]:value});
   }
+  const [country,setCountry]=useState(Country.getAllCountries());
+  const id1=user.country;
+  const id2=user.state;
+  const [state,setState]=useState([]);
+  useEffect(() => {
+  const res=State.getStatesOfCountry(id1);
+    setState(res);
+  },[id1]);
+  const [city,setCity]=useState([]);
+  useEffect(() => {
+    const res=City.getCitiesOfState(id1,id2);
+      setCity(res);
+    },[id1,id2]);
   const PostData=async(e)=>{
     e.preventDefault();
-    const {email,password,cpassword,fname,lname,phone,service,gender,city}=user;
+    const {email,password,cpassword,fname,lname,phone,service,gender,country,state,city}=user;
     try{
     const res=await fetch("/register",{
       method:"POST",
@@ -21,7 +35,7 @@ const Registration = () => {
         "Content-type":"application/json"
       },
       body:JSON.stringify({
-        email,password,cpassword,fname,lname,phone,service,gender,city
+        email,password,cpassword,fname,lname,phone,service,gender,country,state,city
       })
     });
     if (!res.ok) {
@@ -145,12 +159,34 @@ const Registration = () => {
             </select>
           </div>
           <div className="input_field select_option">
+            <select name="country"  required=""
+             value={user.country} onChange={handleInputs}
+                >
+              <option>--Select country--</option>
+              {country.map((country,isoCode)=>(
+                <option key={isoCode} value={country.isoCode} >{country.name}</option>
+             
+              ))}
+            </select>
+          </div>
+          <div className="input_field select_option">
+            <select name="state"  required=""
+              value ={user.state} onChange={handleInputs}
+                >
+              <option>--Select state--</option>
+              {state.map((state,isoCode)=>(
+                <option key={isoCode} value={state.isoCode} >{state.name}</option>
+              ))}
+            </select>
+          </div>
+          <div className="input_field select_option">
             <select name="city"  required=""
-                  value={user.city} onChange={handleInputs}>
-              <option>Select city</option>
-              <option>Hamirpur</option>
-              <option>Kangra</option>
-              <option>Palampur</option>
+             value={user.city} onChange={handleInputs}
+                >
+              <option>--Select city--</option>
+              {city.map((city,isoCode)=>(
+                <option key={isoCode} value={city.isoCode} >{city.name}</option>
+              ))}
             </select>
           </div>
           <div className="input_field checkbox_option">

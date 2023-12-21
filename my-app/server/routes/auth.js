@@ -29,7 +29,7 @@ const isValidPhoneNumber = (phoneNumber) => {
 };
 // labour registration
 router.post('/register',async(req,res)=>{
-    const {email,password,cpassword,phone,fname,lname,service,gender,city}=req.body;
+    const {email,password,cpassword,phone,fname,lname,service,gender,country,state,city}=req.body;
     if(!email ){
         return res.status(422).json({error:"please add all fields"});
     }
@@ -46,7 +46,7 @@ router.post('/register',async(req,res)=>{
         if(userExist){
             return res.status(422).send({error:"Email already exist"});
         }
-         userExist =new RegisterUser({email,password,cpassword,phone,fname,lname,service,gender,city });
+         userExist =new RegisterUser({email,password,cpassword,phone,fname,lname,service,gender,country,state,city });
         await userExist.save();
         const token=await new Token({
           userId:userExist._id,
