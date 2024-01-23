@@ -1,7 +1,10 @@
 import React, {useState,useEffect} from "react";
 import './servicemenRegistration.css';
 import { Country, State, City }  from 'country-state-city';
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const Registration = () => {
+  const navigate=useNavigate();
   const [user,setUser]=useState({
     email:"",password:"",cpassword:"",fname:"",lname:"",phone:"",service:"",gender:"",city:"",state:"",country:""
   });
@@ -26,7 +29,9 @@ const Registration = () => {
       setCity(res);
     },[id1,id2]);
   const PostData=async(e)=>{
+
     e.preventDefault();
+    console.log(user);
     const {email,password,cpassword,fname,lname,phone,service,gender,country,state,city}=user;
     try{
     const res=await fetch("/register",{
@@ -49,7 +54,11 @@ const Registration = () => {
       console.log("Invalid Registration");
     }
     else{
-      window.alert("Successful Registration");
+      toast.success("Successful Registration");
+      setTimeout(()=>{
+        navigate('/');
+      },2000);
+     
       console.log("successful Registration");
       // history.push("/")
     }

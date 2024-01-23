@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-
+import toast from 'react-hot-toast';
 import "./Signup.css"
 
 
@@ -45,10 +45,9 @@ const Signup = () => {
       console.log("Invalid Registration")
     }
     else {
-      window.alert("Registration Successfull trtrdeesd");
+     toast.success("Registration Successfull trtrdeesd");
       console.log("Registration Successfull");
       navigate('/login');
-     
     }
 
 

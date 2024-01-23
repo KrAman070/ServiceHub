@@ -5,11 +5,16 @@ display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color:  #5ad8c9;
 }
 
 .signin-content {
-    background-color: #149485;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #14a191;
         padding: 120px;
+       
         border-radius: 10px;
         box-shadow: 10px 30px 40px rgba(42, 123, 117, 0.984);
 }

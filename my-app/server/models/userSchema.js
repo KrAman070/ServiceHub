@@ -1,6 +1,7 @@
 const mongoose=require('mongoose');
 const validator = require('validator');
 const bcrypt= require('bcryptjs');
+const jwt=require('jsonwebtoken');
 const commonFields = {
     email: {
       type: String,
@@ -75,7 +76,25 @@ const registerFields={
       verified:{
         type:Boolean,
         default:false
+      },
+      rating:{
+        type:Number,
+        default:1.5
+      },
+      feedback:[{
+      userName:{
+        type:String,
+        required:false  
+      },
+      comment:{
+        type:String,      
+        required:false
+      },
+      dateOfComment: {
+        type: Date,
+        required: false,
       }
+      }]
 
 };
 const registerSchema=new mongoose.Schema(registerFields);
@@ -86,13 +105,22 @@ const signupFields = {
         type:String,
         required:true
     },
+    tokens:[
+      {
+        token:{
+      type:String,
+      required:true
+      }
+    }
+    ]
+
   };
   const signupSchema = new mongoose.Schema(signupFields);
 
-  const loginFields = {
-    ...commonFields,
-  };
-  const loginSchema = new mongoose.Schema( loginFields);
+  // const loginFields = {
+  //   ...commonFields,
+  // };
+  // const loginSchema = new mongoose.Schema( loginFields);
   
 
 const preSaveHook = async function (next) {
@@ -106,8 +134,20 @@ const preSaveHook = async function (next) {
 };
 registerSchema.pre('save',preSaveHook);
 signupSchema.pre('save', preSaveHook);
-loginSchema.pre('save', preSaveHook);
+signupSchema.methods.generateAuthToken = async function () {
+  try {
+    let token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
+    this.tokens = this.tokens.concat({ token: token });
+    await this.save();
+    return token;
+
+  }
+  catch (err) {
+    console.log(err);
+  
+  }
+}
 const RegisterUser=mongoose.model('REGISTRATION', registerSchema);
 const SignupUser = mongoose.model('SignupUser', signupSchema);
-const LoginUser = mongoose.model('LoginUser', loginSchema);
-module.exports={RegisterUser,SignupUser,LoginUser};
+// const LoginUser = mongoose.model('LoginUser', loginSchema);
+module.exports={RegisterUser,SignupUser};

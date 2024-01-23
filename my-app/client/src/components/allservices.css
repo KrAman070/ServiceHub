@@ -149,39 +149,59 @@ background-color: #149485;
     margin: 1rem;
     padding: 1rem;
 }
-.dater{
-    display: flex;
-    justify-content: center;
-   margin: 12px;
-   width: 30%;
-   height: 35px;
-   >input{
-    width: 100%;
-    padding: 5px;
-    background-color:white;
-   }
-
-}
 .input-group-text{
     height: 40px;
     cursor: pointer;
 }
 #submit1 {
  display: flex;
- color: rebeccapurpl;
  justify-content: center;
  align-items: center;
+ background-color: #0b6f6a;
+ padding: 10px;
+ color: white;
 }
+@media screen and (max-width: 768px) {
+ .datadspl{
+         flex-direction: row;
+        
+       }
+       body .datadspl .img2, body .datadspl .details{
+         width: 60%;
+         height: 30%;
+         background-color: #f9f7f7;
+         img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;  
+        }
+       }
+   }
+   .datadspl1{
+    display: flex ;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    .feedback{
+        display: flex;
+        padding: 2%;
+        border-radius: 5px;
+        background-color: #00c853;
+        color: white;
+        font-size: 12px;
+    }
+   }
+
 .data_display{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items:center;
-    
     width: 100%;
-   
+    
   .datadspl{
-    padding: 0px;
+    padding: 50px;
     margin:5px;
     background-color: #f9f9f9;
     width: 100%;
@@ -192,11 +212,13 @@ background-color: #149485;
     align-items: center;
     padding: 10px;
     .img2{
-        display: flex;
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;  
+        }
+        display: flex  ;
         width: 50%;
-        height: 90%;
-        align-items: center;
-        justify-content: center;
     }
     .details{
         display: flex;
@@ -220,7 +242,9 @@ background-color: #149485;
             }
         }
     }
+ 
   }
+
 }
 .bttn{
     display: flex;
@@ -262,4 +286,31 @@ background-color: #149485;
         
     }
    
+  }
+  .feedback-form{
+    display: flex;
+    flex-direction: column;
+    background-color: #befff2;
+    width:100%;
+    height:100%;
+    padding: 3%;
+    margin: 2%;
+    span{
+        margin-left: 2%;
+        font-size: 14px;
+        font-weight: bold;
+        color: #015e14;
+    }
+    p{
+        margin-left: 2%;
+        font-size: 15px;
+        font-weight: bold;
+        color : white;
+    }
+    .feedback-display{
+        border-radius: 5px;
+        padding: 5px;
+        margin: 5px;
+        background-color: #31a461;
+    }
   }

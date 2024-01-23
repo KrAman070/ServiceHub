@@ -7,65 +7,27 @@ import Home from "./components/Home.js";
 import Login from "./components/Login.js";
 import Signup from './components/Signup';
 import React from "react";
+import About from "./components/about.jsx";
 import { useState } from "react";
 import {useNavigate} from "react-router-dom";
+import {Toaster} from "react-hot-toast";
+import BookingComplete from "./components/bookingcomplete";
 const AuthContext=React.createContext();
 
 function App() {
-  const [isLoggedIn, setLoggedIn] = useState(false);
-  const [userName, setUserName] = useState();
-  const [user, setUser] = useState({
-    email:"",password:""
-  })
-  let name, value;
-  const handleInputs = (e) => {
-    console.log(e);
-    name = e.target.name;
-    value = e.target.value;
-    setUser({ ...user, [name]: value });
-  }
-
-  const checkSign = async (e) => {
-    e.preventDefault();
-    const { email, password} = user;
-    const res = await fetch('http://localhost:5000/signin', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        email, password
-      })
-    });
-    if (!res.ok) {
-      window.alert("Invalid Login check Email or Password");
-      console.error("Invalid Login");
-      return;
-    }
-    const data=await res.json();
-    const userNameFromRes = data.user.name;
-    setUserName(userNameFromRes);
-    if(data.status===422||data.status===402||!data){
-      window.alert("Invalid Login ");
-      console.log("Invalid Login");
-    }
-    else{
-      setLoggedIn(true);
-      window.alert("Successful Login");
-      console.log("successful Login");
-    }
-
-  }
   return (
     <Router>
-    <Navbar isLoggedIn={isLoggedIn} userName={userName} setLoggedIn={setLoggedIn}/>
+    <Navbar/>
+    <Toaster/>
     <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/registration" element={<Registration />}/>
-      <Route path="/login" element={<Login user={user}handleInputs={handleInputs} checkSign={checkSign}/>}/>
+      <Route path="/login" element={<Login/>}/>
       <Route path="/signup" element={<Signup />}/>
-      <Route path="/services" element={<Services isLoggedIn={isLoggedIn} />} />
+      <Route path="/services" element={<Services />} />
       <Route path="/booking" element={<Booking />} />
+      <Route path="/bookingcomplete" element={<BookingComplete/>}/>
+      <Route path="/about" element={<About/>}/>
     </Routes>
   </Router>
   );

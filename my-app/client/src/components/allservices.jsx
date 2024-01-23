@@ -11,17 +11,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {FaCalendarAlt} from 'react-icons/fa' 
 import serviceDetails from "./DetailofServices";
 import { Country, State, City }  from 'country-state-city';
+import Star from "./Star";
+import { useSelector } from "react-redux";
+import toast from 'react-hot-toast';
+const Services=()=>{
 
-const Services=({isLoggedIn})=>{
-  const [date, setDate] = useState();
-  // console.log(date);
+
+  let isLogin=useSelector(state=>state.isLogin);
+  isLogin=isLogin|| localStorage.getItem("userId");
   const [category,setCategory]=useState({
     service:"",city:"",country:"",state:""
   });
   const [additionalDetails, setAdditionalDetails] = useState("");
   let name,value;
   const handleInputs=(e)=>{
-    console.log(e);
     name=e.target.name;
     value=e.target.value;
     setCategory({...category,[name]:value});
@@ -39,7 +42,6 @@ const Services=({isLoggedIn})=>{
     const res=City.getCitiesOfState(id1,id2);
       setCity(res);
     },[id1,id2]);
-    console.log(category.city);
   const handleAdditionalDetails = (e) => {
     setAdditionalDetails(e.target.value);
   };
@@ -60,6 +62,44 @@ const Services=({isLoggedIn})=>{
     });
     setData1(result);
   }
+  //feedback form show
+  const [showFeedbackForm, setShowFeedbackForm] = useState([]);
+  useEffect(() => {
+    setShowFeedbackForm(data1.map(() => false));
+  }, [data1]);
+  const toggleFeedbackForm = (index,labourId) => {
+    setShowFeedbackForm((prevVisibility) =>
+      prevVisibility.map((visibility, i) => (i === index ? !visibility : visibility))
+    );
+  
+  };
+  const [newFeedback, setNewFeedback] = useState("");
+  console.log(newFeedback);
+  const handleFeedbackSubmit = async(event,id) => {
+    event.preventDefault();
+    const userName=localStorage.getItem("name");
+    const res=await fetch("/feedback",{
+      
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        feedbacks:newFeedback,
+        userName:userName,
+        labourId:id
+      })
+    });
+    if (data.status === 422 || !data) {
+      toast.error("error while submiting feedback");
+      console.log("error while submiting feedback")
+    }
+    else {
+     toast.success("Feedback added succesfully");
+      console.log("Feedback added succesfully");
+    }
+  }
+  console.log(data1);
   const navigate = useNavigate();
     return (
         <>
@@ -164,10 +204,10 @@ const Services=({isLoggedIn})=>{
               ))}
             </select>
           </div>
-          <div className="dater">
+          {/* <div className="dater">
            <input name="date" type="date" onChange={e=>setDate(e.target.value)}></input>
-          </div>
-          <div className="submit1">
+          </div> */}
+          <div className="submit1 mt-4">
   <button
     type="button" id="submit1" onClick={() => filterData(category.service, category.city)}> Check Availability</button>
 </div>
@@ -176,34 +216,60 @@ const Services=({isLoggedIn})=>{
                </div>
             </div>
             <div className="data_display" >
-            {data1.map(i=>{
+            {data1.map((i,index)=>{
               return (
-               <div className="datadspl">
+               <div className="datadspl1">
+                <div className="datadspl">
                <div className="img2">
-                <img src={img4} height="200px"></img>
+                <img src={img4}></img>
                </div>
                <div className="details">
                 <div className="prf">{i.service}</div>
                 <div className="int">
                 <ul>
-                  <li>{i.fname+"  "+i.lname}</li>
-                  <li>{i.city}</li>
+                  <h2>{i.fname+"  "+i.lname}</h2>
+                  <p>{i.city}</p>
+                  <p style={{color:'grey'}}>{i.verified?'verified':'Not verified'}</p>
+                  {/* <p>{i.rating}</p> */}
+                  <Star star={i.rating}></Star>
                 </ul>
                 </div>
                
                <div className="bttn">
                <button className="book-now"onClick={() =>{
-               if(isLoggedIn){ navigate('/booking', { state: { data1: i } })}
+               if(isLogin){ navigate('/booking', { state: { data1: i } })}
               else {alert('Please login before booking') ;
               navigate('/login');}}
                }>Book Now</button>
-                <button className="book-now"onClick={() =>{
-               if(isLoggedIn){ navigate('/ratings', { state: { data1: i } })}
-              else {alert('Please login before booking') ;
-              navigate('/login');}}
-               }>Rating</button>
+                <button className="book-now"onClick={()=>toggleFeedbackForm(index)}>Rating</button>
                </div>
                </div>
+               </div>
+               <div><button className="feedback" onClick={()=>toggleFeedbackForm(index)}>show feedback and ratings</button> 
+               </div> 
+                {showFeedbackForm[index]&& (
+                <div className="feedback-form">
+                  <h1>Feedbacks</h1>
+                  {(!i.feedback|| i.feedback.length===0) ?(<div>No feedbacks yet</div>):
+                    (i.feedback.map((feedback,feedbackIndex) => (
+                     
+                        <div className="feedback-display" key={feedbackIndex}>
+                          <div className="feedback-name"><span>UserName :</span> <p>{feedback.userName}</p></div>
+                          <div className="feedback-rating"><span>Comments :</span><p>{feedback.comment}</p></div>
+                          <div className="feedback-comment"><span>Date :</span><p>{feedback.dateOfComment}</p></div>
+                        </div>
+                      ))
+                    )}
+                  <h1>Add Feedback</h1>
+                  <form onSubmit={(event)=>handleFeedbackSubmit(event,i._id)}>
+                  <input type="text" value={newFeedback} onChange={e => setNewFeedback(e.target.value)} />
+    <button type="submit" onClick={()=>{if(!isLogin){
+      toast.error("Please login before submitting feedback");
+      navigate('/login')}}}>Submit Feedback</button>
+                           </form>
+                  </div>
+                )}
+              
                </div>
               )
             })}

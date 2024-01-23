@@ -20,10 +20,7 @@ app.use(require('./routes/auth'));
 // wants the user to be logined first so i can setup a middleware between 
 // the home page and the about page which checks 
 // whether the user is logined or not . 
-const middleware=(req,res,next)=>{
-    console.log(`hello my middleware`);
-    next();
-}
+
 app.listen(PORT,()=>{
     console.log(`server is running at ${PORT}`);
 })

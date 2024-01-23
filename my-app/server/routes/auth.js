@@ -6,6 +6,7 @@ const cron =require('node-cron');
 const Token=require("../models/token");
 const sendEmail=require("../utils/sendEmail");
 const crypto=require("crypto");
+const moment = require('moment-timezone');
 // Promises...
 // router.post('/register',(req,res)=>{
 //     const {email,password,rpassword,phone,fname,lname }=req.body;
@@ -75,14 +76,15 @@ router.put('/api/update/:id',async(req,res)=>{
     try{
         const {id}=req.params;
         const {isbooked}=req.body;
+  
         const updatedData=await RegisterUser.findByIdAndUpdate(id,{isbooked},{new:true});
         if (!updatedData) {
             return res.status(404).json({ error: 'Data not found' });
           }
-          res.json(updatedData);
-          //  res.json({ message: 'Booking Successful' });
+         return res.status(201).json({success:true});
+
         } catch (error) {
-          console.error(error);
+          console.error("Error is occuring",error);
           res.status(500).send('Internal Server Error');
     }
 });
@@ -134,6 +136,33 @@ router.post('/signup', async (req, res) => {
 
   
 });
+//post the feedback
+router.post('/feedback',async (req,res)=>{
+  const comment=req.body.feedbacks;
+  const userName=req.body.userName;
+  const labourId=req.body.labourId;
+  
+  console.log(userName);
+  console.log(comment);
+  try{
+    const user=await RegisterUser.findById(labourId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    user.feedback.push({
+      comment:comment,
+      userName:userName,
+      dateOfComment:moment().tz("Asia/Kolkata").format()
+    })
+    await user.save();
+    res.status(201).json({message:"feedback added successfully"});
+    
+  }  catch(err){
+    console.log(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+//get the feedback
 // user login
 router.post('/signin', async(req, res) => {
   try {
