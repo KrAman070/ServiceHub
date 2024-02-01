@@ -5,7 +5,7 @@
 	justify-content: center;
 	align-items: center;
     height: 100%;
-	background-color: #6a77b9;
+	background-color: #727fbf;
 }
 .heading{
 	margin-top: 5%;
@@ -152,22 +152,29 @@ input_field select_option{
       background:rgb(255, 255, 255);
     }
     &[type="submit"] {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		background:rgb(247, 247, 247);
 		height: 55px;
 		line-height: 35px;
 		width: 100%;
 		border: none;
+		padding-bottom: 40px;
 		font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 		outline: none;
 		cursor: pointer;
 		color: rgb(0, 0, 0);
-		font-size: 1.25em;
+		font-size: 1.55em;
 		margin-bottom: 10px;
 		&:hover {
 			background-color: (darkenyellow,7%);
 		}
 		&:focus {
 			background-color: (darkenyellow,7%);
+		}
+		>input{
+			color: red;
 		}
 	}    
     /* &[type="checkbox"], &[type="radio"] {
@@ -296,7 +303,7 @@ input_field {
 	75% { -webkit-transform: translate3d(0,2px,0); transform: translate3d(0,2px,0); }
 	100% { -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0); opacity: 1; }
 }
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
 	.form_wrapper {
 		.col_half {
 			width: 100%;
@@ -317,6 +324,12 @@ input_field {
 		}
 	}
 	.remember_me {
-		padding-bottom: 20px;
-	}
+		/* padding-bottom: 20px; */
+@media only screen and (max-width: 600px) {
+		.heading{
+			font-size: 25px;
+		}
+		.form_wrapper {
+			width: 85%;
+		}
 }

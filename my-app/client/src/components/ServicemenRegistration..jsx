@@ -3,6 +3,7 @@ import './servicemenRegistration.css';
 import { Country, State, City }  from 'country-state-city';
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { backendUrl } from "../App";
 const Registration = () => {
   const navigate=useNavigate();
   const [user,setUser]=useState({
@@ -34,7 +35,7 @@ const Registration = () => {
     console.log(user);
     const {email,password,cpassword,fname,lname,phone,service,gender,country,state,city}=user;
     try{
-    const res=await fetch("/register",{
+    const res=await fetch(`${backendUrl}/register`,{
       method:"POST",
       headers:{
         "Content-type":"application/json"

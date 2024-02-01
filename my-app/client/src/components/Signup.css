@@ -53,3 +53,10 @@ input {
 .form-submit:hover {
     background-color: #0056b3;
 }
+@media only screen and (max-width: 600px) {
+    .sign-up{
+        display: flex;
+        justify-content: start;
+        align-items: start;
+    }
+}

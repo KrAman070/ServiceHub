@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../redux/store';
 import toast from 'react-hot-toast';
+import { backendUrl } from '../App';
 const Login = () => {
   const navigate = useNavigate();
   const dispatch=useDispatch();
@@ -23,7 +24,7 @@ const Login = () => {
   const checkSign = async (e) => {
     e.preventDefault();
     const { email, password} = user;
-    const res = await fetch('http://localhost:5000/signin', {
+    const res = await fetch(`${backendUrl}/signin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

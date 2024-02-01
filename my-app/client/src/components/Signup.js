@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import "./Signup.css"
+import { backendUrl } from '../App';
 
 
 const Signup = () => {
@@ -24,7 +25,7 @@ const Signup = () => {
   const postData = async (e) => {
     e.preventDefault();
     const { name, email, password,cpassword} = user;
-    const res = await fetch('http://localhost:5000/signup', {
+    const res = await fetch(`${backendUrl}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

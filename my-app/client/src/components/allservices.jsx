@@ -14,6 +14,7 @@ import { Country, State, City }  from 'country-state-city';
 import Star from "./Star";
 import { useSelector } from "react-redux";
 import toast from 'react-hot-toast';
+import { backendUrl } from "../App";
 const Services=()=>{
 
 
@@ -48,7 +49,7 @@ const Services=()=>{
   const [data,setData]=useState([]);
   const [data1,setData1]=useState([]);
   useEffect(()=>{
-    fetch("/getdata",{
+    fetch(`${backendUrl}/getdata`,{
       method:"GET",
     })
     .then((res)=>res.json())
@@ -77,20 +78,19 @@ const Services=()=>{
   console.log(newFeedback);
   const handleFeedbackSubmit = async(event,id) => {
     event.preventDefault();
-    const userName=localStorage.getItem("name");
-    const res=await fetch("/feedback",{
-      
+    // const userName=localStorage.getItem("name");
+    const res=await fetch(`${backendUrl}/feedback`,{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
       },
       body:JSON.stringify({
         feedbacks:newFeedback,
-        userName:userName,
+        // userName:userName,
         labourId:id
       })
     });
-    if (data.status === 422 || !data) {
+    if (data.status === 422 ||data.status===500 || !data) {
       toast.error("error while submiting feedback");
       console.log("error while submiting feedback")
     }
@@ -231,7 +231,7 @@ const Services=()=>{
                   <p>{i.city}</p>
                   <p style={{color:'grey'}}>{i.verified?'verified':'Not verified'}</p>
                   {/* <p>{i.rating}</p> */}
-                  <Star star={i.rating}></Star>
+                  <h3><Star star={i.rating}></Star></h3>
                 </ul>
                 </div>
                

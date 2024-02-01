@@ -13,7 +13,7 @@ import {useNavigate} from "react-router-dom";
 import {Toaster} from "react-hot-toast";
 import BookingComplete from "./components/bookingcomplete";
 const AuthContext=React.createContext();
-
+export const backendUrl="https://servicehub2.onrender.com";
 function App() {
   return (
     <Router>

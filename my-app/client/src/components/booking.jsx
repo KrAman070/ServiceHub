@@ -4,6 +4,7 @@ import { Link,useLocation,useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import "./booking.css";
+import { backendUrl } from '../App';
 export const Booking = (props) => {
     const location=useLocation();
     const data=location.state?.data1;
@@ -33,7 +34,7 @@ export const Booking = (props) => {
       try{
         const id1=id;
         console.log("hi id");
-        const response = await axios.put(`/api/update/${id1}`, { isbooked: true });
+        const response = await axios.put(`${backendUrl}/api/update/${id1}`, { isbooked: true });
       if (response.data.success) {
         console.log("booked done")
         toast.success("Successful booking");

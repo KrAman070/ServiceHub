@@ -5,7 +5,7 @@ const jwt=require('jsonwebtoken');
 const commonFields = {
     email: {
       type: String,
-      required: true,
+      required: false,
       validate: {
         validator: validator.isEmail,
         message: '{VALUE} is not a valid email',
@@ -14,14 +14,14 @@ const commonFields = {
     },
     password: {
       type: String,
-      required: true,
+      required: false,
     },
   };
 
 const registerFields={
     // email:{
     //     type:String,
-    //     required:true,
+    //     required:false,
     //     validate:{
     //         validator: validator.isEmail,
     //         message: '{VALUE} is not a valid email',
@@ -30,44 +30,44 @@ const registerFields={
     // },
     // password: {
     //     type:String,
-    //     required:true
+    //     required:false
     // },
     ...commonFields,
     cpassword: {
         type:String,
-        required:true
+        required:false
     },
     phone:{
         type:String,
-        required:true
+        required:false
     },
     fname: {
         type:String,
-        required:true
+        required:false
     },
     lname: {
         type:String,
-        required:true
+        required:false
     },
     service:{
         type:String,
-        required:true
+        required:false
     },
     gender:{
         type:String,
-        required:true
+        required:false
       },
       country:{
         type:String,
-        required:true
+        required:false
       },
       state:{
         type:String,
-        required:true
+        required:false
       },
       city:{
         type:String,
-        required:true
+        required:false
       },
       isbooked:{
         type:Boolean,
@@ -82,10 +82,10 @@ const registerFields={
         default:1.5
       },
       feedback:[{
-      userName:{
-        type:String,
-        required:false  
-      },
+      // userName:{
+      //   type:String,
+      //   required:false  
+      // },
       comment:{
         type:String,      
         required:false

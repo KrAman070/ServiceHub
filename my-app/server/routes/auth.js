@@ -139,7 +139,7 @@ router.post('/signup', async (req, res) => {
 //post the feedback
 router.post('/feedback',async (req,res)=>{
   const comment=req.body.feedbacks;
-  const userName=req.body.userName;
+  // const userName=req.body.userName;
   const labourId=req.body.labourId;
   
   console.log(userName);
@@ -151,7 +151,7 @@ router.post('/feedback',async (req,res)=>{
     }
     user.feedback.push({
       comment:comment,
-      userName:userName,
+      // userName:userName,
       dateOfComment:moment().tz("Asia/Kolkata").format()
     })
     await user.save();
